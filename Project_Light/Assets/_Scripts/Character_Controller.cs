@@ -6,7 +6,8 @@ using System.Collections;
 public class Character_Controller : MonoBehaviour {
 
     public Transform camLoc;
-    public GameObject target;
+    public GameObject targetMove;
+    public GameObject targetSelect;
     public GameObject character;
     public float moveSpeed;
 
@@ -34,15 +35,14 @@ public class Character_Controller : MonoBehaviour {
                 if(hitInfo.collider.tag == "Ground")
                 {
                     Destroy(targetInstance);
-                    targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
-                    unit.UnitDestination(targetInstance);
+                    targetInstance = Instantiate(targetMove, hitInfo.point, Quaternion.identity) as GameObject;
+                    unit.UnitDestination(targetInstance, false);
                 }
                 if(hitInfo.collider.tag == "Resource")
                 {
                     Destroy(targetInstance);
-                    targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
-                    unit.UnitDestination(targetInstance);
-                    Debug.Log("resource");
+                    targetInstance = Instantiate(targetSelect, hitInfo.point, Quaternion.identity) as GameObject;
+                    unit.UnitDestination(targetInstance, true);
                 }
             }
         }

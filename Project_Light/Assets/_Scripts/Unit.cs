@@ -7,9 +7,15 @@ public class Unit : MonoBehaviour {
 
     GameObject flag;
     NavMeshAgent agent;
+    bool isResource;
+    ResourceGathering resourceGathering;
+    Camera mainCamera;
+
+    int[] item;
 
     // Use this for initialization
     void Start () {
+        resourceGathering = mainCamera.GetComponent<ResourceGathering>();
         character = this.gameObject;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -21,19 +27,40 @@ public class Unit : MonoBehaviour {
 
     void OnTriggerEnter (Collider other)
     {
-        if(other.gameObject == flag)
+        if(other.gameObject.tag.Equals("Resource") && isResource == true)
+        {
+            agent.SetDestination(transform.position);
+            //Add player collect animation
+            resourceGathering.GatherEvent();
+
+        }
+        if (other.gameObject == flag)
         {
             Destroy(flag);
         }
-        if(other.gameObject.tag.Equals("Resource"))
-        {
-            agent.SetDestination(transform.position);
-        }
     }
 
-    public void UnitDestination (GameObject recievedFlag)
+    public void UnitDestination(GameObject recievedFlag, bool type)
     {
+        isResource = type;
         flag = recievedFlag;
         agent.SetDestination(recievedFlag.transform.position);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
