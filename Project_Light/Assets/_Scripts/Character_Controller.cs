@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Character_Controller : MonoBehaviour {
@@ -21,13 +23,20 @@ public class Character_Controller : MonoBehaviour {
 
         if(Input.GetButtonDown("Fire1"))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
             RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitInfo))
             {
-                Destroy(targetInstance);
-                targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
-                unit.UnitDestination(targetInstance);
+                if(hitInfo.collider.tag == "Ground")
+                {
+                    Destroy(targetInstance);
+                    targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
+                    unit.UnitDestination(targetInstance);
+                }
             }
         }
 	}
