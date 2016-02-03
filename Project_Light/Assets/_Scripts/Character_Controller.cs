@@ -37,6 +37,13 @@ public class Character_Controller : MonoBehaviour {
                     targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
                     unit.UnitDestination(targetInstance);
                 }
+                if(hitInfo.collider.tag == "Resource")
+                {
+                    Destroy(targetInstance);
+                    targetInstance = Instantiate(target, hitInfo.point, Quaternion.identity) as GameObject;
+                    unit.UnitDestination(targetInstance);
+                    Debug.Log("resource");
+                }
             }
         }
 	}

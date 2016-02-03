@@ -25,6 +25,10 @@ public class Unit : MonoBehaviour {
         {
             Destroy(flag);
         }
+        if(other.gameObject.tag.Equals("Resource"))
+        {
+            agent.SetDestination(transform.position);
+        }
     }
 
     public void UnitDestination (GameObject recievedFlag)
