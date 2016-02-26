@@ -44,6 +44,12 @@ public class Character_Controller : MonoBehaviour {
                     targetInstance = Instantiate(targetSelect, hitInfo.point, Quaternion.identity) as GameObject;
                     unit.UnitDestination(targetInstance, true);
                 }
+                if (hitInfo.collider.tag == "Tree")
+                {
+                    Destroy(targetInstance);
+                    targetInstance = Instantiate(targetSelect, hitInfo.point, Quaternion.identity) as GameObject;
+                    unit.UnitDestination(targetInstance, true);
+                }
             }
         }
 	}
