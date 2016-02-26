@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Unit : MonoBehaviour {
+public class Unit : MonoBehaviour
+{
 
-    public GameObject character;
+    public GameObject[] UpgradeButtons;
 
     GameObject flag;
     NavMeshAgent agent;
@@ -15,9 +16,9 @@ public class Unit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        resourceGathering = mainCamera.GetComponent<ResourceGathering>();
-        character = this.gameObject;
+        resourceGathering = Camera.main.GetComponent<ResourceGathering>();
         agent = GetComponent<NavMeshAgent>();
+        //agent = GetComponent<NavMeshAgent>();
     }
 	
 	// Update is called once per frame
@@ -27,13 +28,21 @@ public class Unit : MonoBehaviour {
 
     void OnTriggerEnter (Collider other)
     {
-        if(other.gameObject.tag.Equals("Resource") && isResource == true)
+        if (other.gameObject.tag.Equals("Food") && isResource == true)
         {
             agent.SetDestination(transform.position);
             //Add player collect animation
-            resourceGathering.GatherEvent();
-
+            //resourceGathering.GatherFood();
+            for (int i = 0; i < UpgradeButtons.Length; i++)
+                Instantiate(UpgradeButtons[i]);
         }
+        else if (other.gameObject.tag.Equals("Tree") && isResource)
+        {
+            agent.SetDestination(transform.position);
+            //Add player collect animation
+            resourceGathering.GatherWood();
+        }
+
         if (other.gameObject == flag)
         {
             Destroy(flag);

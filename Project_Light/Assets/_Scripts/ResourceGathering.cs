@@ -2,42 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[System.Serializable]
-public class Item
+
+public class ResourceGathering : MonoBehaviour
 {
-    public string name;
-    public Transform[] tiers;
-}
-
-public class ResourceGathering : MonoBehaviour {
-
-    public Transform[] spawnPoints;
-    public Item[] items;
-
-    Dictionary<string, Transform[]> itemMap = new Dictionary<string, Transform[]>();
-
-   
-
+    public GameObject AttackButton;
+    public GameObject MovementButton;
+    public GameObject DefenseButton;
     // Use this for initialization
-    void Start () {
-
-        for (int i = 0; i < items.Length; i++)
-        {
-            Item item = items[i];
-            itemMap[item.name] = item.tiers;
-        }
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    public void GatherEvent()
+    void Start ()
     {
 
     }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+	
+	}
 
+    public void GatherFood()
+    {
+        
+    }
+
+    public void GatherWood()
+    {
+
+    }
 }
 /*    using UnityEngine;
    using System.Collections;

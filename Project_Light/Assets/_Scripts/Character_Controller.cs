@@ -38,7 +38,7 @@ public class Character_Controller : MonoBehaviour {
                     targetInstance = Instantiate(targetMove, hitInfo.point, Quaternion.identity) as GameObject;
                     unit.UnitDestination(targetInstance, false);
                 }
-                if(hitInfo.collider.tag == "Resource")
+                if(hitInfo.collider.tag == "Food")
                 {
                     Destroy(targetInstance);
                     targetInstance = Instantiate(targetSelect, hitInfo.point, Quaternion.identity) as GameObject;
