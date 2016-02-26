@@ -5,18 +5,18 @@ public class Unit : MonoBehaviour
 {
 
     public GameObject[] UpgradeButtons;
-
+    public GameObject[] FoodButtons;
     GameObject flag;
     NavMeshAgent agent;
     bool isResource;
-    ResourceGathering resourceGathering;
+    //ResourceGathering resourceGathering;
     Camera mainCamera;
 
     int[] item;
 
     // Use this for initialization
     void Start () {
-        resourceGathering = Camera.main.GetComponent<ResourceGathering>();
+       // resourceGathering = Camera.main.GetComponent<ResourceGathering>();
         agent = GetComponent<NavMeshAgent>();
         //agent = GetComponent<NavMeshAgent>();
     }
@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
-        if (other.gameObject.tag.Equals("Food") && isResource == true)
+        if (other.gameObject.tag.Equals("Tree") && isResource == true)
         {
             agent.SetDestination(transform.position);
             //Add player collect animation
@@ -36,11 +36,13 @@ public class Unit : MonoBehaviour
             for (int i = 0; i < UpgradeButtons.Length; i++)
                 Instantiate(UpgradeButtons[i]);
         }
-        else if (other.gameObject.tag.Equals("Tree") && isResource)
+        else if (other.gameObject.tag.Equals("Food") && isResource)
         {
             agent.SetDestination(transform.position);
             //Add player collect animation
-            resourceGathering.GatherWood();
+            //resourceGathering.GatherWood();
+            for (int i = 0; i < FoodButtons.Length; i++)
+                Instantiate(FoodButtons[i]);
         }
 
         if (other.gameObject == flag)

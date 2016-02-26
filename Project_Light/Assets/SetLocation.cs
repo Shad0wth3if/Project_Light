@@ -6,6 +6,7 @@ public class SetLocation : MonoBehaviour {
     Vector3 buttonPlacement;
     MeshRenderer renderer;
     public GameObject player;
+    public GameObject attackUnitPrefab;
     public float mSMultiplier;
     NavMeshAgent playerAgent;
     bool isDestroyed;
@@ -18,7 +19,7 @@ public class SetLocation : MonoBehaviour {
         renderer = GetComponent<MeshRenderer>();
         if (gameObject.tag == "AttackButton")
             buttonPlacement = new Vector3(-6, -5, 6);
-        else if (gameObject.tag == "MovementButton")
+        else if (gameObject.tag == "MovementButton" || gameObject.tag == "AttackUnit")
             buttonPlacement = new Vector3(-10, -5, 0);
         else if (gameObject.tag == "DefenseButton")
             buttonPlacement = new Vector3(-1, -5, 9);
@@ -41,6 +42,11 @@ public class SetLocation : MonoBehaviour {
                 {
                     playerAgent.speed += mSMultiplier;
                     isDestroyed = true;
+                }
+                else if (outHit.collider.tag == "AttackUnit")
+                {
+                   GameObject atu = Instantiate(attackUnitPrefab);
+                   atu.transform.parent = player.transform;
                 }
             }
         }
